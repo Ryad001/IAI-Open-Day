@@ -681,73 +681,69 @@
   <p style="margin-top:10px; font-size:11px; color:rgba(245,240,232,0.18); letter-spacing:1px;">Website made by <span style="color:rgba(201,168,76,0.5);">Ryad Amghar</span></p>
 </footer>
 
-<script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkynbiuzI9j8pmXg7CQu57S8Lr5Wr8tKKmDDPKzAmW9AQr1RvVZhsFmEGynoUK4tQP/exec";
+<!-- OFFLINE MODAL — paste before </body> -->
+<div id="iai-offline-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;">
+  <div id="iai-offline-modal" style="background:#0f0606;border:1px solid rgba(139,26,26,0.6);border-radius:16px;max-width:420px;width:100%;padding:48px 36px;text-align:center;position:relative;box-shadow:0 0 60px rgba(139,26,26,0.25),0 0 120px rgba(139,26,26,0.1);animation:offlineIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;">
+    <div style="width:70px;height:70px;margin:0 auto 24px;animation:offlinePulse 2.5s ease-in-out infinite;">
+      <img src="xcd.png" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 16px rgba(139,26,26,0.6));">
+    </div>
+    <div style="display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(180,40,40,0.4);border-radius:100px;padding:5px 14px;margin-bottom:20px;">
+      <span id="iai-blink-dot" style="width:6px;height:6px;border-radius:50%;background:#c03030;display:inline-block;animation:offlineBlink 1.2s ease-in-out infinite;"></span>
+      <span style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#c03030;font-family:'DM Sans',sans-serif;">Registration Closed</span>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:14px;">We'll be back<br><em style="color:#b02020;font-style:italic;">very soon</em></h2>
+    <p style="font-size:14px;color:rgba(245,240,232,0.45);line-height:1.7;margin-bottom:32px;font-family:'DM Sans',sans-serif;">Registration is temporarily unavailable.<br>Please check back shortly.</p>
+    <div style="display:flex;gap:14px;justify-content:center;">
+      <div style="background:rgba(139,26,26,0.12);border:1px solid rgba(139,26,26,0.3);border-radius:10px;padding:14px 22px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#b02020;line-height:1;">26</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,0.35);margin-top:3px;font-family:'DM Sans',sans-serif;">Apr 2026</div>
+      </div>
+      <div style="background:rgba(139,26,26,0.12);border:1px solid rgba(139,26,26,0.3);border-radius:10px;padding:14px 22px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#b02020;line-height:1;">27</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,0.35);margin-top:3px;font-family:'DM Sans',sans-serif;">Apr 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  function addField(containerId, fieldName, placeholder) {
-    var container = document.getElementById(containerId);
-    var row = document.createElement('div');
-    row.className = 'extra-field-row';
-    var inp = document.createElement('div');
-    inp.className = 'form-group';
-    var input = document.createElement('input');
-    input.type = 'text';
-    input.name = fieldName;
-    input.placeholder = placeholder;
-    inp.appendChild(input);
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'remove-btn';
-    btn.title = 'Remove';
-    btn.innerHTML = '&times;';
-    btn.onclick = function() { row.remove(); };
-    row.appendChild(inp);
-    row.appendChild(btn);
-    container.appendChild(row);
-    input.focus();
+<style>
+@keyframes offlineIn {
+  from { opacity:0; transform:scale(0.85) translateY(20px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+@keyframes offlinePulse {
+  0%,100% { transform:scale(1);   filter:drop-shadow(0 0 8px rgba(139,26,26,0.3)); }
+  50%      { transform:scale(1.08);filter:drop-shadow(0 0 20px rgba(139,26,26,0.7)); }
+}
+@keyframes offlineBlink {
+  0%,100% { opacity:1; }
+  50%     { opacity:0.15; }
+}
+</style>
+
+<script>
+(function() {
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzM6IJfkf5C6RNZOQUxZUvgnmCU-g62TzcNLF2VOotBJ0eGLnCfRoj4leLk9Hrca2KW/exec";
+  var overlay = document.getElementById('iai-offline-overlay');
+
+  function checkStatus() {
+    fetch(SCRIPT_URL, { method: 'GET' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status === 'offline') {
+          overlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        } else {
+          overlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      })
+      .catch(function() {});
   }
 
-  document.getElementById('reg-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
-
-    var form = this;
-    var payload = {};
-    var formData = new FormData(form);
-
-    formData.forEach(function(v, k) {
-      if (k !== 'nationality[]' && k !== 'language[]') payload[k] = v;
-    });
-
-    var natInputs = Array.from(form.querySelectorAll('[name="nationality[]"]')).map(function(i){ return i.value; }).filter(Boolean);
-    var langInputs = Array.from(form.querySelectorAll('[name="language[]"]')).map(function(i){ return i.value; }).filter(Boolean);
-    payload.nationalities = natInputs.join(', ');
-    payload.languages = langInputs.join(', ');
-    payload.submittedAt = new Date().toISOString();
-
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-      window.scrollTo({ top: document.getElementById('register').offsetTop, behavior: 'smooth' });
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = 'Reserve My Place →';
-      alert('Something went wrong. Please try again or contact us directly.');
-    }
-  });
-
-  document.querySelector('a[href="#register"]').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
-  });
+  checkStatus();
+  setInterval(checkStatus, 30000);
+})();
 </script>
 </body>
 </html>
