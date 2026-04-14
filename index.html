@@ -12,6 +12,8 @@
     --crimson-dark: #6b1212;
     --crimson-light: #b02020;
     --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --navy: #0d0d0d;
     --cream: #f5f0e8;
     --white: #ffffff;
     --border: rgba(139,26,26,0.2);
@@ -25,127 +27,6 @@
     color: var(--cream);
     min-height: 100vh;
     overflow-x: hidden;
-  }
-
-  /* ── OFFLINE SCREEN ── */
-  #offline-screen {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #0a0a0a;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 24px;
-  }
-
-  #offline-screen.active { display: flex; }
-
-  .offline-emblem {
-    width: 90px;
-    margin-bottom: 36px;
-    filter: drop-shadow(0 0 30px rgba(139,26,26,0.5));
-    animation: pulse 3s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(139,26,26,0.3)); }
-    50% { filter: drop-shadow(0 0 40px rgba(139,26,26,0.7)); }
-  }
-
-  .offline-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(139,26,26,0.5);
-    color: #c05050;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 7px 20px;
-    border-radius: 100px;
-    margin-bottom: 32px;
-  }
-
-  .offline-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #c05050;
-    animation: blink 1.4s ease-in-out infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  .offline-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 8vw, 90px);
-    font-weight: 300;
-    line-height: 0.95;
-    letter-spacing: -2px;
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-
-  .offline-title em { font-style: italic; color: #b02020; }
-
-  .offline-sub {
-    font-size: 15px;
-    color: rgba(245,240,232,0.45);
-    font-weight: 300;
-    max-width: 380px;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .offline-dates {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-
-  .offline-date-pill {
-    background: rgba(139,26,26,0.1);
-    border: 1px solid rgba(139,26,26,0.3);
-    border-radius: 10px;
-    padding: 16px 28px;
-    text-align: center;
-  }
-
-  .offline-date-pill .day {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 300;
-    color: #b02020;
-    line-height: 1;
-  }
-
-  .offline-date-pill .mo {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.4);
-    margin-top: 4px;
-  }
-
-  .offline-date-pill .tm {
-    font-size: 12px;
-    color: rgba(245,240,232,0.55);
-    margin-top: 6px;
-  }
-
-  .offline-note {
-    font-size: 12px;
-    color: rgba(245,240,232,0.25);
-    letter-spacing: 1px;
   }
 
   /* ── NAV ── */
@@ -166,7 +47,6 @@
     height: 48px;
     object-fit: contain;
     filter: brightness(1.1);
-    cursor: pointer;
   }
 
   nav .nav-cta {
@@ -251,7 +131,10 @@
     animation: fadeUp 0.9s 0.1s ease both;
   }
 
-  .hero h1 em { font-style: italic; color: var(--crimson-light); }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--crimson-light);
+  }
 
   .hero-sub {
     margin-top: 24px;
@@ -561,26 +444,7 @@
     max-width: 420px;
     margin: 0 auto;
     line-height: 1.7;
-    margin-bottom: 32px;
   }
-
-  .fill-again-btn {
-    display: inline-block;
-    background: var(--crimson);
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 15px 40px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-    border: none;
-    cursor: pointer;
-  }
-  .fill-again-btn:hover { background: var(--crimson-light); transform: translateY(-2px); }
 
   /* ── FOOTER ── */
   footer {
@@ -611,35 +475,15 @@
 </head>
 <body>
 
-<!-- OFFLINE SCREEN -->
-<div id="offline-screen">
-  <img class="offline-emblem" src="xcd.png"><div class="offline-badge"><span class="offline-dot"></span> Registration Temporarily Closed</div>
-  <h1 class="offline-title">IAI<br><em>Open Day</em></h1>
-  <p class="offline-sub">Registration is currently unavailable. Please check back soon — we'll be opening spots shortly.</p>
-  <div class="offline-dates">
-    <div class="offline-date-pill">
-      <div class="day">26</div>
-      <div class="mo">April 2026</div>
-      <div class="tm">10 AM – 1 PM</div>
-    </div>
-    <div class="offline-date-pill">
-      <div class="day">27</div>
-      <div class="mo">April 2026</div>
-      <div class="tm">10 AM – 1 PM</div>
-    </div>
-  </div>
-  <p class="offline-note">International Academy of Iraq</p>
-</div>
-
 <!-- NAV -->
 <nav>
-  <img class="logo-horizontal" src="Untitled-25555LOGO-1.png"><a href="#register" class="nav-cta">Register Now</a>
+<img class="logo-horizontal" src="Untitled-25555LOGO-1.png" onclick="location.reload()"><a href="https://ryad001.github.io/IAI-Open-Day/" class="nav-cta">Register Now</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="grid-bg"></div>
-  <img class="hero-emblem" src="xcd.png"><span class="badge">Exclusive Event · April 2026</span>
+  <img class="hero-emblem" src="xcd.png">  <span class="badge">Exclusive Event · April 2026</span>
   <h1>IAI<br><em>Open Day</em></h1>
   <p class="hero-sub">Experience a truly integrated learning environment</p>
 
@@ -658,7 +502,7 @@
 
   <div class="hero-cta">
     <a href="#register" class="btn-primary">Reserve Your Place</a>
-    <p class="voucher-note">❖ <span>Exclusive vouchers &amp; discounts</span> for all Open Day attendees</p>
+    <p class="voucher-note">✦ <span>Exclusive vouchers & discounts</span> for all Open Day attendees</p>
   </div>
 </section>
 
@@ -667,7 +511,7 @@
   <div class="form-container">
 
     <div class="form-header">
-      <img src="xcd.png"> <div class="form-header-text">
+      <img src="xcd.png">      <div class="form-header-text">
         <div class="section-label">Open Day Registration</div>
         <h2>Reserve Your<br>Place Today</h2>
       </div>
@@ -728,8 +572,9 @@
 
         <hr class="divider">
 
-        <div class="group-heading"><span class="num">3</span> Nationality &amp; Language</div>
+        <div class="group-heading"><span class="num">3</span> Nationality & Language</div>
 
+        <!-- Nationalities -->
         <div class="form-group">
           <label>Nationality *</label>
           <div id="nationality-list">
@@ -740,6 +585,7 @@
           </button>
         </div>
 
+        <!-- Languages -->
         <div class="form-group" style="margin-top:8px;">
           <label>Language(s) Spoken at Home *</label>
           <div id="language-list">
@@ -825,45 +671,18 @@
       <div class="tick">🎓</div>
       <h2>You're Registered!</h2>
       <p>Thank you for registering for the IAI Open Day. We'll be in touch shortly with your confirmation and exclusive voucher details.</p>
-      <a href="https://ryad001.github.io/IAI-Open-Day/" class="fill-again-btn">Register Another Person →</a>
     </div>
 
   </div>
 </section>
 
 <footer>
-  <img src="xcd.png"<p>© 2026 International Academy of Iraq · Open Day Registration</p>
+  <img src="Untitled-25555LOGO-1.png">  <p>© 2026 International Academy of Iraq · Open Day Registration</p>
   <p style="margin-top:10px; font-size:11px; color:rgba(245,240,232,0.18); letter-spacing:1px;">Website made by <span style="color:rgba(201,168,76,0.5);">Ryad Amghar</span></p>
 </footer>
 
 <script>
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkynbiuzI9j8pmXg7CQu57S8Lr5Wr8tKKmDDPKzAmW9AQr1RvVZhsFmEGynoUK4tQP/exec";
-  var SHEET_ID   = "YOUR_SHEET_ID_HERE";
-
-  // Check online/offline status from Google Sheet cell P2
-  function checkStatus() {
-    var url = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?tqx=out:csv&range=P2";
-    fetch(url)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var val = text.replace(/["
-
-]/g, '').trim().toLowerCase();
-        if (val === 'offline') {
-          document.getElementById('offline-screen').classList.add('active');
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.getElementById('offline-screen').classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      })
-      .catch(function() {
-        // If fetch fails, stay online
-      });
-  }
-
-  checkStatus();
-  setInterval(checkStatus, 30000); // re-check every 30 seconds
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkynbiuzI9j8pmXg7CQu57S8Lr5Wr8tKKmDDPKzAmW9AQr1RvVZhsFmEGynoUK4tQP/exec";
 
   function addField(containerId, fieldName, placeholder) {
     var container = document.getElementById(containerId);
