@@ -368,6 +368,52 @@
   .submit-btn:hover { background: var(--crimson-dark); transform: translateY(-1px); }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
+  .add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1px dashed rgba(139,26,26,0.4);
+    color: var(--crimson);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .add-btn:hover { background: rgba(139,26,26,0.06); border-color: var(--crimson); }
+
+  .extra-field-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    margin-top: 12px;
+  }
+  .extra-field-row .form-group { flex: 1; margin-bottom: 0; }
+
+  .remove-btn {
+    background: none;
+    border: 1px solid #ddd0c8;
+    color: #c08080;
+    font-size: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 1px;
+  }
+  .remove-btn:hover { background: #fdf0f0; color: var(--crimson); border-color: var(--crimson); }
+
   .privacy-note {
     text-align: center;
     font-size: 12px;
@@ -431,8 +477,7 @@
 
 <!-- NAV -->
 <nav>
-  <img class="logo-horizontal" src="Untitled-25555LOGO-1.png" alt="">
-  <a href="#register" class="nav-cta">Register Now</a>
+  <img class="logo-horizontal" src="Untitled-25555LOGO-1.png"><a href="#register" class="nav-cta">Register Now</a>
 </nav>
 
 <!-- HERO -->
@@ -466,7 +511,8 @@
   <div class="form-container">
 
     <div class="form-header">
-      <img src="xcd.png"> <div class="form-header-text">
+      <img src="data:image/png;base64,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" alt="IAI">
+      <div class="form-header-text">
         <div class="section-label">Open Day Registration</div>
         <h2>Reserve Your<br>Place Today</h2>
       </div>
@@ -496,20 +542,14 @@
             <div class="select-wrap">
               <select name="currentYear" required>
                 <option value="" disabled selected>Select year group</option>
-                <option>KG 1</option>
-                <option>KG 2</option>
-                <option>Grade 1</option>
-                <option>Grade 2</option>
-                <option>Grade 3</option>
-                <option>Grade 4</option>
-                <option>Grade 5</option>
-                <option>Grade 6</option>
-                <option>Grade 7</option>
-                <option>Grade 8</option>
-                <option>Grade 9</option>
-                <option>Grade 10</option>
-                <option>Grade 11</option>
-                <option>Grade 12</option>
+                <option>Year 7 / Grade 6</option>
+                <option>Year 8 / Grade 7</option>
+                <option>Year 9 / Grade 8</option>
+                <option>Year 10 / Grade 9</option>
+                <option>Year 11 / Grade 10</option>
+                <option>Year 12 / Grade 11</option>
+                <option>Year 13 / Grade 12</option>
+                <option>Other</option>
               </select>
             </div>
           </div>
@@ -534,15 +574,27 @@
         <hr class="divider">
 
         <div class="group-heading"><span class="num">3</span> Nationality & Language</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nationality *</label>
-            <input type="text" name="nationality" required placeholder="e.g. Iraqi">
+
+        <!-- Nationalities -->
+        <div class="form-group">
+          <label>Nationality *</label>
+          <div id="nationality-list">
+            <input type="text" name="nationality[]" required placeholder="e.g. Iraqi">
           </div>
-          <div class="form-group">
-            <label>Primary Language at Home *</label>
-            <input type="text" name="language" required placeholder="e.g. Arabic">
+          <button type="button" class="add-btn" onclick="addField('nationality-list','nationality[]','e.g. British')">
+            + Add another nationality
+          </button>
+        </div>
+
+        <!-- Languages -->
+        <div class="form-group" style="margin-top:8px;">
+          <label>Language(s) Spoken at Home *</label>
+          <div id="language-list">
+            <input type="text" name="language[]" required placeholder="e.g. Arabic">
           </div>
+          <button type="button" class="add-btn" onclick="addField('language-list','language[]','e.g. English')">
+            + Add another language
+          </button>
         </div>
 
         <hr class="divider">
@@ -626,22 +678,54 @@
 </section>
 
 <footer>
-  <img src="Untitled-25555LOGO-1.png" alt="">  <p>© 2026 International Academy of Iraq · Open Day Registration</p>
+  <img src="Untitled-25555LOGO-1.png">  <p>© 2026 International Academy of Iraq · Open Day Registration</p>
   <p style="margin-top:10px; font-size:11px; color:rgba(245,240,232,0.18); letter-spacing:1px;">Website made by <span style="color:rgba(201,168,76,0.5);">Ryad Amghar</span></p>
 </footer>
 
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkynbiuzI9j8pmXg7CQu57S8Lr5Wr8tKKmDDPKzAmW9AQr1RvVZhsFmEGynoUK4tQP/exec";
 
+  function addField(containerId, fieldName, placeholder) {
+    var container = document.getElementById(containerId);
+    var row = document.createElement('div');
+    row.className = 'extra-field-row';
+    var inp = document.createElement('div');
+    inp.className = 'form-group';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.name = fieldName;
+    input.placeholder = placeholder;
+    inp.appendChild(input);
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'remove-btn';
+    btn.title = 'Remove';
+    btn.innerHTML = '&times;';
+    btn.onclick = function() { row.remove(); };
+    row.appendChild(inp);
+    row.appendChild(btn);
+    container.appendChild(row);
+    input.focus();
+  }
+
   document.getElementById('reg-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('submit-btn');
+    var btn = document.getElementById('submit-btn');
     btn.disabled = true;
     btn.textContent = 'Submitting…';
 
-    const data = new FormData(this);
-    const payload = {};
-    data.forEach((v, k) => payload[k] = v);
+    var form = this;
+    var payload = {};
+    var formData = new FormData(form);
+
+    formData.forEach(function(v, k) {
+      if (k !== 'nationality[]' && k !== 'language[]') payload[k] = v;
+    });
+
+    var natInputs = Array.from(form.querySelectorAll('[name="nationality[]"]')).map(function(i){ return i.value; }).filter(Boolean);
+    var langInputs = Array.from(form.querySelectorAll('[name="language[]"]')).map(function(i){ return i.value; }).filter(Boolean);
+    payload.nationalities = natInputs.join(', ');
+    payload.languages = langInputs.join(', ');
     payload.submittedAt = new Date().toISOString();
 
     try {
